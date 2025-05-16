@@ -1333,38 +1333,6 @@ html.platform-osx .title_c38106 {
 		background-color: var(--input-background);
 		border-color: var(--input-background);
 	}
-/* Title bar fix */
-.titleBar-AC4pGV {
-    height: 28px !important;
-    padding-right: 130px !important; /* Space for - [] X buttons */
-    padding-left: 10px !important;
-    margin: 0 !important;
-    z-index: 9999 !important;
-    background-color: var(--background-secondary) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    overflow: visible !important;
-}
-
-/* Windows title bar type (if applicable) */
-.typeWindows-2-g3UY {
-    height: 28px !important;
-    background-color: var(--background-secondary-alt) !important;
-    overflow: visible !important;
-}
-
-/* Makes sure window control buttons aren’t clipped */
-.container-1eFT6o {
-    overflow: visible !important;
-}
-
-/* Optional: ensure window buttons aren't hidden */
-.winButton-3UMjdg {
-    display: flex !important;
-    position: relative !important;
-    z-index: 10000 !important;
-}
 
 	
 	/* border radius 9 list of offenders */
