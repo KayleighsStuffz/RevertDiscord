@@ -1,0 +1,41 @@
+.visual-refresh div[class^="sidebar_"] section[class^="panels_"] {
+    width: calc(var(--custom-guild-sidebar-width) - var(--custom-guild-list-width) + 1px);
+    left: var(--custom-guild-list-width);
+    bottom: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.visual-refresh nav[class*=guilds_] {
+  margin-bottom: unset;
+}
+
+[class*='membersGroup']:has([role=button]),
+[class*='member'] [class*='container']:has([class*='badges']) {
+  display: none;
+}
+
+span[class*="timestampInline_"] time::before {
+  content: attr(aria-label);
+  font-size: 12px;
+}
+
+span[class*="timestampInline_"] {
+  font-size: 12px !important;
+}
+
+.container_c48ade {
+  --custom-chat-input-margin-bottom: 22px;
+}
+:root {
+  --custom-channel-textarea-text-area-height: 42px;
+}
+.visual-refresh .base_b88801 {
+  font-size: 13.5px;
+  height: 22px;
+  display: flex !important;
+  align-items: center !important;
+}
+   
+1
+    
