@@ -1,0 +1,10 @@
+/* replace all display name fonts with a single one*/
+[class*="zillaSlab"], /* Tempo */
+[class*="cherryBomb"], /* Sakura */
+[class*="chicle"], /* Jellybean */
+[class*="museoModerno"], /* Modern */
+[class*="neoCastel"], /* Medieval */
+[class*="pixelify"], /* 8Bit */
+[class*="sinistre"] { /* Vampyre */
+  font-family: var(--font-primary) !important;
+}
