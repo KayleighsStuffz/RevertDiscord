@@ -1,0 +1,17 @@
+/* Remove Frequent Friends section */
+.frequentFriendsRow__1fc18,
+div[class*="frequentFriends"] {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+}
+
+/* Remove section divider */
+.sectionDivider_e6b769,
+div[class*="sectionDivider"] {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+}
