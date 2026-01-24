@@ -1,0 +1,11 @@
+/* import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/Fix%20Discord%20UI.css"); */
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/Blurple");
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/other_modified.css");
+@import url('https://chloecinders.github.io/visual-refresh-compact-title-bar/desktop.css');
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/FixServerBar");
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/Fixed%20Extras");
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/Old-Invites");
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/NoMoreFonts");
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/Header");
+@import url("https://raw.githubusercontent.com/KayleighsStuffz/RevertDiscord/refs/heads/main/FrequentFriendRemover");
+@import url(https://blade04208.github.io/css/unmodal.css);
