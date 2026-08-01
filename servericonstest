@@ -1,6 +1,6 @@
 :root {
-  --guildbar-avatar-size: 64px;
-  --guildbar-folder-size: 64px;
+  --guildbar-avatar-size: 56px;
+  --guildbar-folder-size: 56px;
 
   --guildbar-icon-gap: 4px;
   --custom-guild-list-padding: 8px;
@@ -53,7 +53,6 @@
   padding: 0 !important;
 }
 
-/* Direct server-item wrappers */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -89,16 +88,11 @@
   min-height: var(--guildbar-avatar-size) !important;
 
   margin: 0 auto !important;
-
-  /*
-   * The badge must be allowed outside the icon.
-   * The foreignObject handles the circular clipping instead.
-   */
   overflow: visible !important;
 }
 
 /* =========================================================
-   CIRCULAR ICON MASKING
+   CIRCULAR SERVER ICONS
    ========================================================= */
 
 :is(
@@ -115,10 +109,7 @@
   overflow: hidden !important;
 }
 
-/*
- * Allow badges outside the SVG while clipping only the
- * foreignObject containing the server image.
- */
+/* Allow badges to extend outside the SVG */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -130,10 +121,7 @@
   overflow: visible !important;
 }
 
-/*
- * Disable Discord's squircle mask.
- * The border-radius now provides the circular clipping.
- */
+/* Remove Discord's rounded-square SVG mask */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -149,7 +137,7 @@
   overflow: hidden !important;
 }
 
-/* Ensure the contents completely fill the foreignObject */
+/* Fill and centre foreignObject contents */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -168,7 +156,7 @@
   overflow: hidden !important;
 }
 
-/* Server images */
+/* Server icon images */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -186,10 +174,7 @@
   border-radius: 50% !important;
 }
 
-/*
- * Keep icons circular while hovered and selected.
- * Discord normally changes these into rounded squares.
- */
+/* Keep hovered and selected icons circular */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -224,7 +209,6 @@
   padding: 0 !important;
 }
 
-/* Centre every relevant home-button wrapper */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -253,7 +237,7 @@
   transform: none !important;
 }
 
-/* Discord circle */
+/* Discord button circle */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -282,8 +266,8 @@
 
   display: block !important;
 
-  width: 36px !important;
-  height: 36px !important;
+  width: 32px !important;
+  height: 32px !important;
 
   margin: auto !important;
 
@@ -296,7 +280,7 @@
    NOTIFICATION AND PING BADGES
    ========================================================= */
 
-/* Lower-right ping badges */
+/* Lower-right notification badges */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -304,8 +288,8 @@
 ) [class*="lowerBadge"] {
   position: absolute !important;
 
-  right: -4px !important;
-  bottom: -4px !important;
+  right: -3px !important;
+  bottom: -3px !important;
 
   left: auto !important;
   top: auto !important;
@@ -318,7 +302,7 @@
   overflow: visible !important;
 }
 
-/* Upper-right event badges */
+/* Upper-right badges */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -326,8 +310,8 @@
 ) [class*="upperBadge"] {
   position: absolute !important;
 
-  right: -4px !important;
-  top: -4px !important;
+  right: -3px !important;
+  top: -3px !important;
 
   left: auto !important;
   bottom: auto !important;
@@ -340,7 +324,7 @@
   overflow: visible !important;
 }
 
-/* Number badge styling */
+/* Number badge appearance */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
@@ -352,19 +336,19 @@
   align-items: center !important;
   justify-content: center !important;
 
-  min-width: 22px !important;
-  height: 22px !important;
+  min-width: 20px !important;
+  height: 20px !important;
 
-  padding: 0 6px !important;
+  padding: 0 5px !important;
 
   border: 3px solid
     var(--background-base-lowest, var(--background-tertiary, #111214))
     !important;
 
-  border-radius: 11px !important;
+  border-radius: 10px !important;
 
-  font-size: 12px !important;
-  line-height: 16px !important;
+  font-size: 11px !important;
+  line-height: 14px !important;
 
   overflow: visible !important;
 }
@@ -415,8 +399,8 @@
   nav[aria-label="Servers"],
   nav[data-list-id="guildsnav"]
 ) [class*="folderIcon"] svg {
-  width: 30px !important;
-  height: 30px !important;
+  width: 28px !important;
+  height: 28px !important;
 }
 
 /* =========================================================
@@ -455,7 +439,7 @@
   ) !important;
 }
 
-/* Mini icons inside a closed folder */
+/* Mini folder-preview icons */
 :is(
   nav[class*="guilds"],
   nav[aria-label="Servers"],
