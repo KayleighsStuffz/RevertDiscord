@@ -1,338 +1,580 @@
 :root {
-  --guildbar-avatar-size: 48px;
-  --guildbar-folder-size: var(--guildbar-avatar-size);
+  --guildbar-avatar-size: 64px;
+  --guildbar-folder-size: 64px;
 
-  --custom-guild-list-padding: 12px;
+  --guildbar-icon-gap: 4px;
+  --custom-guild-list-padding: 8px;
+
   --custom-guild-list-width: calc(
-    max(var(--guildbar-avatar-size), var(--guildbar-folder-size))
+    var(--guildbar-avatar-size)
     + (var(--custom-guild-list-padding) * 2)
   );
 
+  --custom-guild-item-height: calc(
+    var(--guildbar-avatar-size)
+    + var(--guildbar-icon-gap)
+  );
+
   --custom-folder-preview-gap: 0px;
-  --custom-icon-radius: 50%;
-  --custom-icon-selected-radius: 27%;
-  --custom-icon-transition-speed: 150ms;
 }
 
-nav[class*="guilds"],
-nav[aria-label="Servers"],
-nav[data-list-id="guildsnav"] {
-  width: var(--custom-guild-list-width);
+/* =========================================================
+   MAIN SERVER BAR
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) {
+  width: var(--custom-guild-list-width) !important;
+  min-width: var(--custom-guild-list-width) !important;
 }
 
-/* Server list item sizing */
-nav[class*="guilds"] [class*="listItem"],
-nav[aria-label="Servers"] [class*="listItem"],
-nav[data-list-id="guildsnav"] [class*="listItem"] {
-  width: var(--custom-guild-list-width);
+/* =========================================================
+   SERVER LIST ITEMS
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="listItem"] {
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: var(--custom-guild-list-width) !important;
+  height: var(--custom-guild-item-height) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* Only resize wrappers belonging directly to server-list items */
-nav[class*="guilds"] [class*="listItem"] > [class*="wrapper"],
-nav[aria-label="Servers"] [class*="listItem"] > [class*="wrapper"],
-nav[data-list-id="guildsnav"] [class*="listItem"] > [class*="wrapper"],
-nav[class*="guilds"] [class*="blobContainer"],
-nav[aria-label="Servers"] [class*="blobContainer"],
-nav[data-list-id="guildsnav"] [class*="blobContainer"],
-nav[class*="guilds"] [class*="tutorialContainer"] [class*="wrapper"],
-nav[aria-label="Servers"] [class*="tutorialContainer"] [class*="wrapper"],
-nav[data-list-id="guildsnav"] [class*="tutorialContainer"] [class*="wrapper"] {
+/* Direct server-item wrappers */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="listItem"] > [class*="wrapper"] {
   width: var(--guildbar-avatar-size) !important;
   height: var(--guildbar-avatar-size) !important;
+
+  min-width: var(--guildbar-avatar-size) !important;
+  min-height: var(--guildbar-avatar-size) !important;
+
+  margin: 0 auto !important;
 }
 
-/* Server icon containers */
-nav[class*="guilds"] [class*="blobContainer"],
-nav[aria-label="Servers"] [class*="blobContainer"],
-nav[data-list-id="guildsnav"] [class*="blobContainer"],
-nav[class*="guilds"] [class*="childWrapper"],
-nav[aria-label="Servers"] [class*="childWrapper"],
-nav[data-list-id="guildsnav"] [class*="childWrapper"] {
-  border-radius: var(--custom-icon-radius) !important;
-  overflow: hidden;
-  transition:
-    border-radius var(--custom-icon-transition-speed) linear,
-    background-color var(--custom-icon-transition-speed) linear;
-}
+/* =========================================================
+   SERVER ICON CONTAINERS
+   ========================================================= */
 
-/* Actual server images */
-nav[class*="guilds"] img[class*="icon"],
-nav[aria-label="Servers"] img[class*="icon"],
-nav[data-list-id="guildsnav"] img[class*="icon"],
-nav[class*="guilds"] [class*="childWrapper"] img,
-nav[aria-label="Servers"] [class*="childWrapper"] img,
-nav[data-list-id="guildsnav"] [class*="childWrapper"] img {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
-  border-radius: inherit !important;
-}
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) :is(
+  [class*="listItemWrapper"],
+  [class*="blobContainer"]
+) {
+  position: relative !important;
 
-/* Rounded-square state when selected or hovered */
-nav[class*="guilds"] [class*="listItem"]:hover [class*="blobContainer"],
-nav[aria-label="Servers"] [class*="listItem"]:hover [class*="blobContainer"],
-nav[data-list-id="guildsnav"] [class*="listItem"]:hover [class*="blobContainer"],
-nav[class*="guilds"] [class*="listItem"]:hover [class*="childWrapper"],
-nav[aria-label="Servers"] [class*="listItem"]:hover [class*="childWrapper"],
-nav[data-list-id="guildsnav"] [class*="listItem"]:hover [class*="childWrapper"],
-nav[class*="guilds"] [class*="selected"] [class*="blobContainer"],
-nav[aria-label="Servers"] [class*="selected"] [class*="blobContainer"],
-nav[data-list-id="guildsnav"] [class*="selected"] [class*="blobContainer"],
-nav[class*="guilds"] [class*="selected"] [class*="childWrapper"],
-nav[aria-label="Servers"] [class*="selected"] [class*="childWrapper"],
-nav[data-list-id="guildsnav"] [class*="selected"] [class*="childWrapper"],
-nav[class*="guilds"] [class*="blobContainer"][class*="selected"],
-nav[aria-label="Servers"] [class*="blobContainer"][class*="selected"],
-nav[data-list-id="guildsnav"] [class*="blobContainer"][class*="selected"],
-nav[class*="guilds"] [class*="childWrapper"][class*="selected"],
-nav[aria-label="Servers"] [class*="childWrapper"][class*="selected"],
-nav[data-list-id="guildsnav"] [class*="childWrapper"][class*="selected"] {
-  border-radius: var(--custom-icon-selected-radius) !important;
-}
-
-/* Home and add-server icons */
-nav[class*="guilds"] [class*="childWrapper"] > svg,
-nav[aria-label="Servers"] [class*="childWrapper"] > svg,
-nav[data-list-id="guildsnav"] [class*="childWrapper"] > svg {
-  width: calc(var(--guildbar-avatar-size) - 18px);
-  height: calc(var(--guildbar-avatar-size) - 18px);
-}
-
-/* Circular icon buttons */
-nav[class*="guilds"] [class*="circleIconButton"],
-nav[aria-label="Servers"] [class*="circleIconButton"],
-nav[data-list-id="guildsnav"] [class*="circleIconButton"] {
   width: var(--guildbar-avatar-size) !important;
   height: var(--guildbar-avatar-size) !important;
-  border-radius: var(--custom-icon-radius) !important;
-  transition: border-radius var(--custom-icon-transition-speed) linear;
+
+  min-width: var(--guildbar-avatar-size) !important;
+  min-height: var(--guildbar-avatar-size) !important;
+
+  margin: 0 auto !important;
+
+  /*
+   * The badge must be allowed outside the icon.
+   * The foreignObject handles the circular clipping instead.
+   */
+  overflow: visible !important;
 }
 
-nav[class*="guilds"] [class*="circleIconButton"]:hover,
-nav[aria-label="Servers"] [class*="circleIconButton"]:hover,
-nav[data-list-id="guildsnav"] [class*="circleIconButton"]:hover,
-nav[class*="guilds"] [class*="circleIconButton"][class*="selected"],
-nav[aria-label="Servers"] [class*="circleIconButton"][class*="selected"],
-nav[data-list-id="guildsnav"] [class*="circleIconButton"][class*="selected"] {
-  border-radius: var(--custom-icon-selected-radius) !important;
-}
+/* =========================================================
+   CIRCULAR ICON MASKING
+   ========================================================= */
 
-/* Drag-and-drop indicators */
-nav[class*="guilds"] [class*="dragInner"],
-nav[aria-label="Servers"] [class*="dragInner"],
-nav[data-list-id="guildsnav"] [class*="dragInner"] {
-  width: 40px;
-  height: 40px;
-}
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="childWrapper"] {
+  box-sizing: border-box !important;
 
-nav[class*="guilds"] [class*="dragOver"][class*="target"]::before,
-nav[aria-label="Servers"] [class*="dragOver"][class*="target"]::before,
-nav[data-list-id="guildsnav"] [class*="dragOver"][class*="target"]::before {
-  left: calc(var(--guildbar-avatar-size) / 4);
-  width: 100%;
-}
+  width: var(--guildbar-avatar-size) !important;
+  height: var(--guildbar-avatar-size) !important;
 
-nav[class*="guilds"] [class*="dragOver"][class*="centerTarget"]::before,
-nav[aria-label="Servers"] [class*="dragOver"][class*="centerTarget"]::before,
-nav[data-list-id="guildsnav"] [class*="dragOver"][class*="centerTarget"]::before {
-  top: calc((var(--guildbar-avatar-size) / 2) + 8px);
-}
-
-/* Shifted SVG and badge positioning */
-nav[class*="guilds"] [class*="shiftSVG"],
-nav[aria-label="Servers"] [class*="shiftSVG"],
-nav[data-list-id="guildsnav"] [class*="shiftSVG"] {
-  top: 0;
-  left: 0;
-}
-
-nav[class*="guilds"] [class*="shiftSVG"] foreignObject,
-nav[aria-label="Servers"] [class*="shiftSVG"] foreignObject,
-nav[data-list-id="guildsnav"] [class*="shiftSVG"] foreignObject {
-  transform: translate(-4px, -4px);
+  border-radius: 50% !important;
+  overflow: hidden !important;
 }
 
 /*
- * Preserve badge offsets without modifying Discord's blob masks.
- * This avoids the bug that caused icons to become invisible.
+ * Allow badges outside the SVG while clipping only the
+ * foreignObject containing the server image.
  */
-nav[class*="guilds"] mask,
-nav[aria-label="Servers"] mask,
-nav[data-list-id="guildsnav"] mask {
-  --badge-offset: calc(var(--guildbar-avatar-size) - 40px);
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) svg:not([class*="placeholderMask"]) {
+  width: var(--guildbar-avatar-size) !important;
+  height: var(--guildbar-avatar-size) !important;
+
+  overflow: visible !important;
 }
 
-nav[class*="guilds"]
-  :not([class*="folderHeader"])
-  mask
-  use[href$="lower_badge_masks"],
-nav[aria-label="Servers"]
-  :not([class*="folderHeader"])
-  mask
-  use[href$="lower_badge_masks"],
-nav[data-list-id="guildsnav"]
-  :not([class*="folderHeader"])
-  mask
-  use[href$="lower_badge_masks"] {
-  translate: var(--badge-offset) var(--badge-offset);
+/*
+ * Disable Discord's squircle mask.
+ * The border-radius now provides the circular clipping.
+ */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) svg:not([class*="placeholderMask"]) > foreignObject {
+  width: var(--guildbar-avatar-size) !important;
+  height: var(--guildbar-avatar-size) !important;
+
+  mask: none !important;
+  clip-path: none !important;
+
+  border-radius: 50% !important;
+  overflow: hidden !important;
 }
 
-nav[class*="guilds"]
-  :not([class*="folderHeader"])
-  mask
-  use[href$="upper_badge_masks"],
-nav[aria-label="Servers"]
-  :not([class*="folderHeader"])
-  mask
-  use[href$="upper_badge_masks"],
-nav[data-list-id="guildsnav"]
-  :not([class*="folderHeader"])
-  mask
-  use[href$="upper_badge_masks"] {
-  translate: var(--badge-offset);
+/* Ensure the contents completely fill the foreignObject */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) svg foreignObject > div {
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  border-radius: 50% !important;
+  overflow: hidden !important;
 }
 
-/* Folder button */
-nav[class*="guilds"] [class*="folderButton"],
-nav[aria-label="Servers"] [class*="folderButton"],
-nav[data-list-id="guildsnav"] [class*="folderButton"] {
-  overflow: visible;
+/* Server images */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) :is(
+  svg foreignObject img,
+  img[class*="icon"]
+) {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+  border-radius: 50% !important;
 }
 
-nav[class*="guilds"] [class*="folderHeader"],
-nav[aria-label="Servers"] [class*="folderHeader"],
-nav[data-list-id="guildsnav"] [class*="folderHeader"] {
+/*
+ * Keep icons circular while hovered and selected.
+ * Discord normally changes these into rounded squares.
+ */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) :is(
+  [class*="blobContainer"],
+  [class*="childWrapper"],
+  [class*="circleIconButton"]
+) {
+  border-radius: 50% !important;
+}
+
+/* =========================================================
+   DISCORD HOME BUTTON
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="tutorialContainer"] {
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: var(--custom-guild-list-width) !important;
+  height: var(--custom-guild-item-height) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Centre every relevant home-button wrapper */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="tutorialContainer"] :is(
+  [class*="listItem"],
+  [class*="wrapper"],
+  [class*="listItemWrapper"]
+) {
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: var(--guildbar-avatar-size) !important;
+  height: var(--guildbar-avatar-size) !important;
+
+  margin: 0 auto !important;
+  padding: 0 !important;
+
+  left: auto !important;
+  right: auto !important;
+
+  translate: none !important;
+  transform: none !important;
+}
+
+/* Discord circle */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="tutorialContainer"] [class*="childWrapper"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: var(--guildbar-avatar-size) !important;
+  height: var(--guildbar-avatar-size) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border-radius: 50% !important;
+}
+
+/* Discord logo */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="tutorialContainer"] [class*="childWrapper"] > svg {
+  position: static !important;
+
+  display: block !important;
+
+  width: 36px !important;
+  height: 36px !important;
+
+  margin: auto !important;
+
+  inset: auto !important;
+  translate: none !important;
+  transform: none !important;
+}
+
+/* =========================================================
+   NOTIFICATION AND PING BADGES
+   ========================================================= */
+
+/* Lower-right ping badges */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="lowerBadge"] {
+  position: absolute !important;
+
+  right: -4px !important;
+  bottom: -4px !important;
+
+  left: auto !important;
+  top: auto !important;
+
+  z-index: 20 !important;
+
+  translate: none !important;
+  transform: none !important;
+
+  overflow: visible !important;
+}
+
+/* Upper-right event badges */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="upperBadge"] {
+  position: absolute !important;
+
+  right: -4px !important;
+  top: -4px !important;
+
+  left: auto !important;
+  bottom: auto !important;
+
+  z-index: 20 !important;
+
+  translate: none !important;
+  transform: none !important;
+
+  overflow: visible !important;
+}
+
+/* Number badge styling */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="numberBadge"] {
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  min-width: 22px !important;
+  height: 22px !important;
+
+  padding: 0 6px !important;
+
+  border: 3px solid
+    var(--background-base-lowest, var(--background-tertiary, #111214))
+    !important;
+
+  border-radius: 11px !important;
+
+  font-size: 12px !important;
+  line-height: 16px !important;
+
+  overflow: visible !important;
+}
+
+/* =========================================================
+   FOLDER BUTTONS
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="folderButton"] {
+  width: var(--guildbar-folder-size) !important;
+  height: var(--guildbar-folder-size) !important;
+
+  overflow: visible !important;
+}
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="folderHeader"] {
   width: var(--guildbar-folder-size) !important;
   height: var(--guildbar-folder-size) !important;
 }
 
 /* Folder icon */
-nav[class*="guilds"] [class*="folderIcon"],
-nav[aria-label="Servers"] [class*="folderIcon"],
-nav[data-list-id="guildsnav"] [class*="folderIcon"] {
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="folderIcon"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
   width: var(--guildbar-folder-size) !important;
   height: var(--guildbar-folder-size) !important;
-  background-color: var(--bg-mod-subtle);
+
+  border-radius: 50% !important;
+  background-color: var(--bg-mod-subtle) !important;
 }
 
-nav[class*="guilds"] [class*="folderIcon"] svg,
-nav[aria-label="Servers"] [class*="folderIcon"] svg,
-nav[data-list-id="guildsnav"] [class*="folderIcon"] svg {
-  width: 24px !important;
-  height: 24px !important;
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="folderIcon"] svg {
+  width: 30px !important;
+  height: 30px !important;
 }
 
-/* Folder preview layout */
-nav[class*="guilds"] [class*="folderPreviewWrapper"],
-nav[aria-label="Servers"] [class*="folderPreviewWrapper"],
-nav[data-list-id="guildsnav"] [class*="folderPreviewWrapper"] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--guildbar-folder-size);
-  height: var(--guildbar-folder-size);
+/* =========================================================
+   CLOSED-FOLDER PREVIEWS
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="folderPreviewWrapper"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: var(--guildbar-folder-size) !important;
+  height: var(--guildbar-folder-size) !important;
+
+  border-radius: 50% !important;
+  overflow: hidden !important;
 }
 
-nav[class*="guilds"] [class$="folderPreview"],
-nav[aria-label="Servers"] [class$="folderPreview"],
-nav[data-list-id="guildsnav"] [class$="folderPreview"] {
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class$="folderPreview"] {
   width: calc(
     (var(--guildbar-folder-size) * 2 / 3)
     + var(--custom-folder-preview-gap)
-  );
+  ) !important;
+
   height: calc(
     (var(--guildbar-folder-size) * 2 / 3)
     + var(--custom-folder-preview-gap)
-  );
+  ) !important;
 }
 
-/* Mini server icons inside closed-folder previews */
-nav[class*="guilds"] [class*="iconSizeMini"],
-nav[aria-label="Servers"] [class*="iconSizeMini"],
-nav[data-list-id="guildsnav"] [class*="iconSizeMini"] {
-  width: calc(var(--guildbar-folder-size) / 3);
-  height: calc(var(--guildbar-folder-size) / 3);
-  overflow: hidden;
+/* Mini icons inside a closed folder */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="iconSizeMini"] {
+  width: calc(var(--guildbar-folder-size) / 3) !important;
+  height: calc(var(--guildbar-folder-size) / 3) !important;
+
+  overflow: hidden !important;
 }
 
-nav[class*="guilds"] [class*="iconSizeMini"] [class*="acronym"],
-nav[aria-label="Servers"] [class*="iconSizeMini"] [class*="acronym"],
-nav[data-list-id="guildsnav"] [class*="iconSizeMini"] [class*="acronym"] {
-  line-height: calc(var(--guildbar-folder-size) / 3);
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="iconSizeMini"] [class*="acronym"] {
+  line-height: calc(var(--guildbar-folder-size) / 3) !important;
 }
 
-nav[class*="guilds"] [class*="iconSizeMini"][style*="font-size: 12px;"],
-nav[aria-label="Servers"] [class*="iconSizeMini"][style*="font-size: 12px;"],
-nav[data-list-id="guildsnav"] [class*="iconSizeMini"][style*="font-size: 12px;"] {
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="iconSizeMini"][style*="font-size: 12px;"] {
   font-size: 10px !important;
 }
 
-nav[class*="guilds"] [class*="iconSizeMini"][style*="font-size: 10px;"],
-nav[aria-label="Servers"] [class*="iconSizeMini"][style*="font-size: 10px;"],
-nav[data-list-id="guildsnav"] [class*="iconSizeMini"][style*="font-size: 10px;"] {
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="iconSizeMini"][style*="font-size: 10px;"] {
   font-size: 7px !important;
 }
 
-nav[class*="guilds"] [class*="iconSizeMini"][style*="font-size: 8px;"],
-nav[aria-label="Servers"] [class*="iconSizeMini"][style*="font-size: 8px;"],
-nav[data-list-id="guildsnav"] [class*="iconSizeMini"][style*="font-size: 8px;"] {
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="iconSizeMini"][style*="font-size: 8px;"] {
   font-size: 6px !important;
 }
 
-/* Keep folder-preview images centred and cropped */
-nav[class*="guilds"] [class*="folderPreview"] img,
-nav[aria-label="Servers"] [class*="folderPreview"] img,
-nav[data-list-id="guildsnav"] [class*="folderPreview"] img,
-nav[class*="guilds"] [class*="folderPreviewGuildIcon"],
-nav[aria-label="Servers"] [class*="folderPreviewGuildIcon"],
-nav[data-list-id="guildsnav"] [class*="folderPreviewGuildIcon"] {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Folder-preview images */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) :is(
+  [class*="folderPreview"] img,
+  [class*="folderPreviewGuildIcon"]
+) {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
 }
 
-/* Expanded folders */
-nav[class*="guilds"] [class*="isExpanded"] [class*="stack"],
-nav[aria-label="Servers"] [class*="isExpanded"] [class*="stack"],
-nav[data-list-id="guildsnav"] [class*="isExpanded"] [class*="stack"] {
+/* =========================================================
+   EXPANDED FOLDERS
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="isExpanded"] [class*="stack"] {
   height: auto !important;
 }
 
-nav[class*="guilds"]
-  [class*="isExpanded"]
-  [class*="folderGroupBackground"],
-nav[aria-label="Servers"]
-  [class*="isExpanded"]
-  [class*="folderGroupBackground"],
-nav[data-list-id="guildsnav"]
-  [class*="isExpanded"]
-  [class*="folderGroupBackground"] {
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="isExpanded"] [class*="folderGroupBackground"] {
+  border-bottom-left-radius: 24px !important;
+  border-bottom-right-radius: 24px !important;
 }
 
-/* Unread direct-message icons */
-nav[class*="guilds"] #guild-list-unread-dms > div,
-nav[aria-label="Servers"] #guild-list-unread-dms > div,
-nav[data-list-id="guildsnav"] #guild-list-unread-dms > div {
-  height: var(--guildbar-avatar-size) !important;
+/* =========================================================
+   DRAG-AND-DROP INDICATORS
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="dragInner"] {
+  width: calc(var(--guildbar-avatar-size) - 8px) !important;
+  height: calc(var(--guildbar-avatar-size) - 8px) !important;
 }
 
-/* Safe foreignObject centring */
-nav[class*="guilds"] svg foreignObject > div,
-nav[aria-label="Servers"] svg foreignObject > div,
-nav[data-list-id="guildsnav"] svg foreignObject > div {
-  width: 100%;
-  height: 100%;
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="dragOver"][class*="target"]::before {
+  left: calc(var(--guildbar-avatar-size) / 4) !important;
+  width: 100% !important;
 }
 
-/*
- * Do not override:
- * - defs > path
- * - mask path geometry
- * - blob_mask scale
- *
- * Discord relies on those SVG definitions to display its server icons.
- */
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) [class*="dragOver"][class*="centerTarget"]::before {
+  top: calc(var(--guildbar-avatar-size) / 2) !important;
+}
+
+/* =========================================================
+   UNREAD DIRECT MESSAGES
+   ========================================================= */
+
+:is(
+  nav[class*="guilds"],
+  nav[aria-label="Servers"],
+  nav[data-list-id="guildsnav"]
+) #guild-list-unread-dms > div {
+  height: var(--custom-guild-item-height) !important;
+}
