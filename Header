@@ -43,13 +43,13 @@
   }
 
   /* header stops before the buttons + is draggable */
-  div[class*="chat_"] section[class*="container_"] {
+  section[class*="container_"][class*="themed_"] {
     margin-right: var(--hdr-space);
     -webkit-app-region: drag;
   }
 
   /* keep the header's own buttons/search clickable */
-  div[class*="chat_"] section[class*="container_"] :is(
+  section[class*="container_"][class*="themed_"] :is(
     button, a, input, [role="button"], [role="tab"],
     [class*="search"], [class*="toolbar_"]
   ) {
