@@ -6,18 +6,6 @@
     grid-template-rows: [top] 0 [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
   }
 
-  /* backup drag strip along the very top of the window */
-  div[class*="base_"]::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: var(--hdr-space);
-    height: 6px;
-    z-index: 1000;
-    -webkit-app-region: drag;
-  }
-
   /* float the title bar's buttons into the top-right corner */
   div[class*="base_"] > div[class*="bar_"] {
     position: absolute;
@@ -42,16 +30,16 @@
     -webkit-app-region: no-drag;
   }
 
-  /* make room in the DM/channel header + make it draggable */
+  /* make room in the DM/channel header so nothing hides under the buttons */
   div[class*="chat_"] section[class*="container_"] {
     padding-right: var(--hdr-space);
-    -webkit-app-region: drag;
+    -webkit-app-region: drag; /* lets you drag the window by the header */
   }
 
-  /* keep the actual buttons/search clickable */
+  /* ...but keep everything clickable in the header clickable */
   div[class*="chat_"] section[class*="container_"] :is(
     button, a, input, [role="button"], [role="tab"],
-    [class*="search"], [class*="toolbar_"]
+    [class*="search"], [class*="toolbar_"], [class*="children_"]
   ) {
     -webkit-app-region: no-drag;
   }
