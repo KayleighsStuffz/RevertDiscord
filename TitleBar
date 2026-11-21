@@ -33,6 +33,15 @@
   /* make room in the DM/channel header so nothing hides under the buttons */
   div[class*="chat_"] section[class*="container_"] {
     padding-right: var(--hdr-space);
+    -webkit-app-region: drag; /* lets you drag the window by the header */
+  }
+
+  /* ...but keep everything clickable in the header clickable */
+  div[class*="chat_"] section[class*="container_"] :is(
+    button, a, input, [role="button"], [role="tab"],
+    [class*="search"], [class*="toolbar_"], [class*="children_"]
+  ) {
+    -webkit-app-region: no-drag;
   }
 
   /* push the server list down so the top icon isn't cut off */
