@@ -1,6 +1,5 @@
 .visual-refresh {
   --hdr-space: 230px;
-  --drag-strip: 12px;
 
   /* collapse the title bar */
   div[class*="base_"]:has(> div[class*="bar_"]) {
@@ -42,7 +41,7 @@
     -webkit-app-region: no-drag !important;
   }
 
-  /* header: room on the right for the buttons, and never covers them with drag */
+  /* header: room on the right for the buttons, never drags under them */
   section[class*="container_"][class*="themed_"] {
     position: relative;
     padding-right: var(--hdr-space) !important;
@@ -50,23 +49,22 @@
     -webkit-app-region: no-drag;
   }
 
-  /* invisible drag strip along the top of the header */
-  section[class*="container_"][class*="themed_"]::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: var(--hdr-space);
-    height: var(--drag-strip);
+  /* EVERYTHING inside the header is draggable... */
+  section[class*="container_"][class*="themed_"] * {
     -webkit-app-region: drag;
-    pointer-events: none;
   }
 
-  /* keep the header's own buttons/search clickable */
+  /* ...except the stuff you actually click */
   section[class*="container_"][class*="themed_"] :is(
-    button, a, input, [role="button"], [role="tab"],
-    [class*="search"], [class*="toolbar_"]
-  ) {
+    button, a, input, [role="button"], [role="tab"], [role="link"],
+    [role="combobox"], [role="textbox"], [contenteditable],
+    [class*="search"], [class*="clickable"], [class*="iconWrapper"]
+  ),
+  section[class*="container_"][class*="themed_"] :is(
+    button, a, input, [role="button"], [role="tab"], [role="link"],
+    [role="combobox"], [role="textbox"], [contenteditable],
+    [class*="search"], [class*="clickable"], [class*="iconWrapper"]
+  ) * {
     -webkit-app-region: no-drag;
   }
 
