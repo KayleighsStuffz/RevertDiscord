@@ -34,7 +34,6 @@
     border: none;
   }
 
-  /* FORCE the title bar buttons to be clickable */
   [class*="trailing_"],
   [class*="trailing_"] *,
   [class*="winButtons_"],
@@ -42,10 +41,24 @@
     -webkit-app-region: no-drag !important;
   }
 
-  /* header stops before the buttons + is draggable */
+  /* header: draggable, with room on the right for the buttons */
   section[class*="container_"][class*="themed_"] {
-    margin-right: var(--hdr-space);
+    position: relative;
+    padding-right: var(--hdr-space) !important;
+    box-sizing: border-box;
     -webkit-app-region: drag;
+  }
+
+  /* invisible "not draggable" patch where the buttons sit */
+  section[class*="container_"][class*="themed_"]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--hdr-space);
+    -webkit-app-region: no-drag;
+    pointer-events: none;
   }
 
   /* keep the header's own buttons/search clickable */
