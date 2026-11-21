@@ -1,5 +1,6 @@
 .visual-refresh {
   --hdr-space: 230px;
+  --drag-strip: 12px;
 
   /* collapse the title bar */
   div[class*="base_"]:has(> div[class*="bar_"]) {
@@ -41,23 +42,23 @@
     -webkit-app-region: no-drag !important;
   }
 
-  /* header: draggable, with room on the right for the buttons */
+  /* header: room on the right for the buttons, and never covers them with drag */
   section[class*="container_"][class*="themed_"] {
     position: relative;
     padding-right: var(--hdr-space) !important;
     box-sizing: border-box;
-    -webkit-app-region: drag;
+    -webkit-app-region: no-drag;
   }
 
-  /* invisible "not draggable" patch where the buttons sit */
+  /* invisible drag strip along the top of the header */
   section[class*="container_"][class*="themed_"]::after {
     content: "";
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
-    width: var(--hdr-space);
-    -webkit-app-region: no-drag;
+    left: 0;
+    right: var(--hdr-space);
+    height: var(--drag-strip);
+    -webkit-app-region: drag;
     pointer-events: none;
   }
 
