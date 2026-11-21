@@ -1,0 +1,42 @@
+.visual-refresh {
+  --hdr-space: 230px;
+
+  /* collapse the title bar */
+  div[class*="base_"] {
+    grid-template-rows: [top] 0 [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
+  }
+
+  /* float the title bar's buttons into the top-right corner */
+  div[class*="base_"] > div[class*="bar_"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: var(--custom-channel-header-height, 48px);
+    z-index: 101;
+    background: none;
+    border: none;
+  }
+
+  div[class*="base_"] > div[class*="bar_"] > div[class*="title_"],
+  div[class*="base_"] > div[class*="bar_"] > div[class*="leading_"] {
+    display: none; /* delete the leading_ line if you want the back/forward arrows */
+  }
+
+  div[class*="base_"] > div[class*="bar_"] div[class*="trailing_"] {
+    height: 100%;
+    background: none;
+    border: none;
+    -webkit-app-region: no-drag;
+  }
+
+  /* make room in the DM/channel header so nothing hides under the buttons */
+  div[class*="chat_"] section[class*="container_"] {
+    padding-right: var(--hdr-space);
+  }
+
+  /* push the server list down so the top icon isn't cut off */
+  ul[data-list-id="guildsnav"] > div[class*="itemsContainer_"] > div[class*="stack_"] {
+    margin-top: 16px;
+  }
+}
