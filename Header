@@ -1,9 +1,24 @@
 .visual-refresh {
   --hdr-space: 230px;
+  --grab-bar: 8px;
 
-  /* collapse the title bar */
+  /* thin title bar row instead of a full one */
   div[class*="base_"]:has(> div[class*="bar_"]) {
-    grid-template-rows: [top] 0 [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
+    position: relative;
+    grid-template-rows: [top] var(--grab-bar) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
+  }
+
+  /* the grab bar itself */
+  div[class*="base_"]:has(> div[class*="bar_"])::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--grab-bar);
+    background: var(--background-base-lowest, #121214);
+    z-index: 102;
+    -webkit-app-region: drag;
   }
 
   /* keep the main content BELOW the buttons */
@@ -11,10 +26,10 @@
     z-index: 0;
   }
 
-  /* float the title bar's buttons into the top-right corner */
+  /* float the title bar's buttons into the header, just under the grab bar */
   div[class*="base_"] > div[class*="bar_"] {
     position: absolute;
-    top: 0;
+    top: var(--grab-bar);
     right: 0;
     width: auto;
     height: var(--custom-channel-header-height, 48px);
@@ -41,35 +56,14 @@
     -webkit-app-region: no-drag !important;
   }
 
-  /* header: room on the right for the buttons, never drags under them */
+  /* header: room for the buttons, no drag weirdness */
   section[class*="container_"][class*="themed_"] {
-    position: relative;
     padding-right: var(--hdr-space) !important;
     box-sizing: border-box;
-    -webkit-app-region: no-drag;
   }
 
-  /* EVERYTHING inside the header is draggable... */
+  section[class*="container_"][class*="themed_"],
   section[class*="container_"][class*="themed_"] * {
-    -webkit-app-region: drag;
-  }
-
-  /* ...except the stuff you actually click */
-  section[class*="container_"][class*="themed_"] :is(
-    button, a, input, [role="button"], [role="tab"], [role="link"],
-    [role="combobox"], [role="textbox"], [contenteditable],
-    [class*="search"], [class*="clickable"], [class*="iconWrapper"]
-  ),
-  section[class*="container_"][class*="themed_"] :is(
-    button, a, input, [role="button"], [role="tab"], [role="link"],
-    [role="combobox"], [role="textbox"], [contenteditable],
-    [class*="search"], [class*="clickable"], [class*="iconWrapper"]
-  ) * {
     -webkit-app-region: no-drag;
-  }
-
-  /* push the server list down so the top icon isn't cut off */
-  ul[data-list-id="guildsnav"] > div[class*="itemsContainer_"] > div[class*="stack_"] {
-    margin-top: 16px;
   }
 }
