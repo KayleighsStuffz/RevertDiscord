@@ -11,18 +11,6 @@
     z-index: 0;
   }
 
-  /* backup drag strip along the very top of the window */
-  div[class*="base_"]:has(> div[class*="bar_"])::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: var(--hdr-space);
-    height: 6px;
-    z-index: 1000;
-    -webkit-app-region: drag;
-  }
-
   /* float the title bar's buttons into the top-right corner */
   div[class*="base_"] > div[class*="bar_"] {
     position: absolute;
@@ -33,7 +21,6 @@
     z-index: 101;
     background: none;
     border: none;
-    pointer-events: auto;
   }
 
   div[class*="base_"] > div[class*="bar_"] > div[class*="title_"],
@@ -45,7 +32,14 @@
     height: 100%;
     background: none;
     border: none;
-    -webkit-app-region: no-drag;
+  }
+
+  /* FORCE the title bar buttons to be clickable */
+  [class*="trailing_"],
+  [class*="trailing_"] *,
+  [class*="winButtons_"],
+  [class*="winButtons_"] * {
+    -webkit-app-region: no-drag !important;
   }
 
   /* header stops before the buttons + is draggable */
@@ -54,7 +48,7 @@
     -webkit-app-region: drag;
   }
 
-  /* keep the actual buttons/search clickable */
+  /* keep the header's own buttons/search clickable */
   div[class*="chat_"] section[class*="container_"] :is(
     button, a, input, [role="button"], [role="tab"],
     [class*="search"], [class*="toolbar_"]
